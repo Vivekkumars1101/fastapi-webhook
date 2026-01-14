@@ -1,10 +1,21 @@
 import sqlite3
+import os
 from datetime import datetime
 from .config import settings
 
+# Get the directory where storage.py lives (C:\...\fastapi-webhook\app)
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Go up one level to the root folder (C:\...\fastapi-webhook)
+BASE_DIR = os.path.dirname(CURRENT_DIR)
+
+# Join it with the 'data' folder and the db name
+DB_PATH = os.path.join(BASE_DIR, "data", "webhook.db")
+
 def get_db():
-    path = settings.DATABASE_URL.replace("sqlite:////", "/")
-    conn = sqlite3.connect(path)
+    # This prints exactly where it's trying to save, helping us debug!
+    print(f"Connecting to database at: {DB_PATH}")
+    conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     return conn
 
