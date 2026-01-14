@@ -4,7 +4,8 @@ import requests
 import json
 
 # Must match the $env:WEBHOOK_SECRET you set earlier
-SECRET = "testsecret"
+# Inside test_webhook.py
+SECRET = "my_super_secret_key"
 URL = "http://localhost:8000/webhook"
 
 payload = {
